@@ -79,3 +79,66 @@ maneira diferente para a intensidade de cinza. A fórmula mais comum é:
 - Transpose a Matriz: Troque linhas por colunas.
 - Reverse as Colunas: Inverta a ordem das colunas.
 - Se a imagem original tem dimensões M×N, a imagem rotacionada terá dimensões N×M.
+
+## ABERTURA DE ARQUIVO:
+ - FILE *fp;
+ - fp = fopen("koala.ppm","r");
+ 
+## LEITURA DO FORMATO:
+ - char formato[3];
+ - fscanf(fp, "%s", formato);  // lê o tipo de imagem P3 (color), P2 (P&B) 
+ - printf("%s\n", formato);  
+
+## LEITURA DO TAMANHO DA IMAGEM:
+ - int coluna, linha;
+ - fscanf(fp, "%d %d", &coluna, &linha); // lê o tamanho da matriz  
+ - printf("%d %d\n", coluna, linha);
+
+
+## LEITURA DO VALOR MÁXIMO POR PIXEL:
+ - int valor;
+ - fscanf(fp, "%d", &valor);  // lê o valor máximo.
+ - printf("%d\n", valor);
+
+## CRIANDO UM ARQUIVO PPM:
+## ABERTURA DE ARQUIVO:
+ - FILE* fp_novo = fopen ("koalacopy.ppm", "w");
+
+## ESCREVENDO O CABEÇALHO NO ARQUIVO:
+ - fprintf (fp_novo, "P2\n");
+ - fprintf (fp_novo, "%d %d\n", coluna, linha);
+ - fprintf (fp_novo, "%d\n", valor);
+
+## PRÓXIMO PASSO ESCREVER A MATRIZ DE PIXEL’S– PODE-SE USAR STRUCT:
+## LEITURA DE TODOS OS PIXELS DA IMAGEM:
+ - int i, j;
+ - for(j=0; j<linha; j++)
+ - {
+ - for(i=0; i<coluna; i++)
+ - {  
+ - fscanf(fp, "%d %d %d", &r, &g, &b);
+ - printf("%d %d %d\n", r, g, b);
+ - }
+ - }
+
+ ## FECHAMENTO DO ARQUIVO
+ - fclose(fp)
+
+ ## COMO CRIAR UMA STRUCTDOS PIXELS:
+ -  #include <stdio.h>
+ -  typedef struct // Esta struct é uma estrutura composta por 3 números inteiros – neste caso R, G e B.
+ - {
+ - int R;
+ - int G;
+ - int B;
+ - } RGB;
+
+ - int main() 
+ -{
+ - RGB vetor[3][3]; //Aqui é feito a instanciação da  struct RGB do vetor bidimensional
+ - vetor[0][0].R = 130; // A atribuição de um valor a matriz bidimensional, utiliza-se o ponto (. ) com a instância a cada elemento da struct
+ - vetor[0][0].G = 150;
+ - vetor[0][0].B = 120;
+ -  printf("%d - %d - %d", vetor[0][0].R, vetor[0][0].G, vetor[0][0].B);
+ -  return 0;
+ - }
