@@ -70,8 +70,7 @@ int main()
     } while (opcao != 7);
 }
 
-void tonsDeCinza()
-{
+void tonsDeCinza(){
     FILE *fp = fopen(nomeImagem,"r");
     if (fp == NULL)
     {
