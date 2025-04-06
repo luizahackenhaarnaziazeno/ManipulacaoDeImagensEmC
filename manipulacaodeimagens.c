@@ -5,6 +5,7 @@
 char nomeImagem[100]= "C:\projects\Facul\T1C\ManipulacaoDeImagens\Imagens";
 char imagem[100];
 
+
 void tonsDeCinza();
 void negativa();
 void raioX();
@@ -134,7 +135,6 @@ void tonsDeCinza()
     fclose(fp_novo);
     printf("Nova imagem salva como '%s'.\n", nomeSaida);
 }
-
 // IMPLEMENTAR AS FUNÇÕES AQUI
 void negativa() {}
 void raioX() {}
