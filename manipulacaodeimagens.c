@@ -42,6 +42,7 @@ int main()
         else if (opcao == 2)
         {
             printf("Você escolheu gerar uma imagem negativa.\n");
+            negativa();
         }
         else if (opcao == 3)
         {
@@ -134,8 +135,50 @@ void tonsDeCinza(){
     fclose(fp_novo);
     printf("Nova imagem salva como '%s'.\n", nomeSaida);
 }
+
+void negativa() {
+    void negativo()
+{
+    for(j=0; j<linha; j++)
+	{
+		for(i=0; i<coluna; i++)
+		{  	
+            fscanf(fp, "%d %d %d", &r, &g, &b);
+		  	//printf("%d %d %d\n", r, g, b);
+		  	matriz[j][i].r = 255-r;
+            matriz[j][i].g = 255-g;
+            matriz[j][i].b = 255-b;
+		  	//printf("%d\n", matriz[j][i]);
+		}
+	}
+
+    printf("Leu todo o arquivo e gerou matriz com pixels negativos\n");
+  	fclose(fp);
+
+    // CRIANDO A IMAGEM NEGATIVA
+
+    FILE* fp_novo = fopen ("goldenNegativa.ppm", "w");
+    printf("criou o arquivo\n");
+    
+    fprintf (fp_novo, "P3\n");
+    fprintf (fp_novo, "%d %d\n", coluna, linha);
+    fprintf (fp_novo, "%d\n", val);
+
+	for(j=0; j<linha; j++)
+	{
+		for(i=0; i<coluna; i++)
+		{  	
+		  	fprintf(fp_novo, "%d\n", matriz[j][i].r);
+            fprintf(fp_novo, "%d\n", matriz[j][i].g);
+            fprintf(fp_novo, "%d\n", matriz[j][i].b);
+		}
+	}
+	fclose(fp_novo);
+	printf("Fechou o novo arquivo ppm\n");
+}
+}
+
 // IMPLEMENTAR AS FUNÇÕES AQUI
-void negativa() {}
 void raioX() {}
 void envelhecida() {} //Gabrielle
 void rotacionar90() {} //Luiza 
