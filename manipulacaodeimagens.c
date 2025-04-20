@@ -13,6 +13,7 @@ void envelhecida();
 void rotacionar90();
 void rotacionar180();
 
+
 int main()
 {
     int opcao;
@@ -27,7 +28,7 @@ int main()
         printf("1. Gerar uma imagem tons de cinza\n");
         printf("2. Gerar uma imagem negativa\n");
         printf("3. Gerar uma imagem raio-x\n");
-        printf("4. Gerar uma imagem envelhecida (sépia)\n");
+        printf("4. Gerar uma imagem envelhecida (sepia)\n");
         printf("5. Rotacionar a imagem 90º\n");
         printf("6. Rotacionar a imagem 180º\n");
         printf("7. Exit\n");
@@ -36,29 +37,29 @@ int main()
 
         if (opcao == 1)
         {
-            printf("Você escolheu gerar uma imagem tons de cinza.\n");
+            printf("Voce escolheu gerar uma imagem tons de cinza.\n");
             tonsDeCinza();
         }
         else if (opcao == 2)
         {
-            printf("Você escolheu gerar uma imagem negativa.\n");
+            printf("Voce escolheu gerar uma imagem negativa.\n");
             negativa();
         }
         else if (opcao == 3)
         {
-            printf("Você escolheu gerar uma imagem raio-x.\n");
+            printf("Voce escolheu gerar uma imagem raio-x.\n");
         }
         else if (opcao == 4)
         {
-            printf("Você escolheu gerar uma imagem envelhecida (sépia).\n");
+            printf("Voce escolheu gerar uma imagem envelhecida (sépia).\n");
         }
         else if (opcao == 5)
         {
-            printf("Você escolheu rotacionar a imagem 90º.\n");
+            printf("Voce escolheu rotacionar a imagem 90º.\n");
         }
         else if (opcao == 6)
         {
-            printf("Você escolheu rotacionar a imagem 180º.\n");
+            printf("Voce escolheu rotacionar a imagem 180º.\n");
         }
         else if (opcao == 7)
         {
@@ -135,10 +136,21 @@ void tonsDeCinza(){
     fclose(fp_novo);
     printf("Nova imagem salva como '%s'.\n", nomeSaida);
 }
-
+//metodo esta incorreto não possui leitura de arquivo
 void negativa() {
-    void negativo()
-{
+    typedef struct
+    {
+        int r;
+        int g;
+        int b;
+    } RGB;
+    
+    FILE *fp;
+    char nomearquivo[100];
+    char tipoImg[3];
+    int i, j, linha, coluna, val, op, r, g, b;
+    RGB matriz[700][700];
+
     for(j=0; j<linha; j++)
 	{
 		for(i=0; i<coluna; i++)
@@ -176,7 +188,7 @@ void negativa() {
 	fclose(fp_novo);
 	printf("Fechou o novo arquivo ppm\n");
 }
-}
+
 
 // IMPLEMENTAR AS FUNÇÕES AQUI
 void raioX() {}
