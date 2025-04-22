@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-char nomeImagem[100]= "C:\projects\Facul\T1C\ManipulacaoDeImagens\Imagens";
-char imagem[100];
-
 
 void tonsDeCinza();
 void negativa();
@@ -18,8 +15,7 @@ int main()
 {
     int opcao;
     
-    
-    do
+    while (1)
     {
         printf("Menu Do Que Fazer Com A Imagem:\n");
         printf("1. Gerar uma imagem tons de cinza\n");
@@ -61,17 +57,18 @@ int main()
         else if (opcao == 7)
         {
             printf("Fechando o programa.\n");
+            break;
         }
         else
         {
             printf("Opção inválida.\n");
         }
-    } while (opcao != 7);
+    }
 }
 
 void tonsDeCinza(){
     FILE *fp;
-    fp= fopen("C:\projects\Facul\T1C\ManipulacaoDeImagens\Imagens\araravermelha.ppm","r");
+    fp= fopen("araravermelha.ppm","r");
    
 	if(fp==NULL){
 		printf("Erro ao abrir o arquivo!");
