@@ -18,9 +18,6 @@ int main()
 {
     int opcao;
     
-    printf("Imagens Disponiveis: arara vermelha.ppm, cat.ppm, Elephant.ppm, fish.ppm, snake.ppm,tigre branco.ppm\n");
-    printf("Digite o nome da imagem PPM que deseja manipular (Exemplo: imagem.ppm): ");  
-    scanf("%s",imagem);
     
     do
     {
@@ -73,68 +70,60 @@ int main()
 }
 
 void tonsDeCinza(){
-    FILE *fp = fopen(nomeImagem,"r");
-    if (fp == NULL)
-    {
-        perror("Erro ao abrir o arquivo");
-        return;
-    }
-    if (fp == NULL)
-    {
-        printf("Erro ao abrir o arquivo '%s'!\n", nomeImagem);
-        return;
-    }
+    FILE *fp;
+    fp= fopen("C:\projects\Facul\T1C\ManipulacaoDeImagens\Imagens\araravermelha.ppm","r");
+   
+	if(fp==NULL){
+		printf("Erro ao abrir o arquivo!");
+		}
+  	char tipoImg[3];
 
-    char tipoImg[3];
-    int linha, coluna, val, r, g, b, i, j;
+  	int i, j, linha, coluna, val, r, g, b;
+  	
+  	fscanf(fp, "%s", tipoImg); // le o tipo de imagem P3 (color), P2 (P&B) 
+  	printf("%s\n", tipoImg);
+  	
+  	fscanf(fp, "%d %d", &coluna, &linha); // le o tamanho da matriz  
+  	printf("%d %d\n", coluna, linha);
 
-    fscanf(fp, "%s", tipoImg);
-    fscanf(fp, "%d %d", &coluna, &linha);
-    fscanf(fp, "%d", &val);
+  	int matriz[700][700];
+  	
+  	fscanf(fp, "%d", &val); // le o valor maximo. 
+  	printf("%d\n", val);
 
-    int matriz[700][700];
+	for(j=0; j<linha; j++)
+	{
+		for(i=0; i<coluna; i++)
+		{  	
+  			fscanf(fp, "%d %d %d", &r, &g, &b);
+		  	//printf("%d %d %d\n", r, g, b);
+		  	matriz[j][i] = ((r*0.30)+(g*0.59)+(b*0.11));
+		  	//printf("%d\n", matriz[j][i]);
+		}
+	}
+	printf("leu todo o arquivo e gerou vetor p&b\n");
+  	fclose(fp);
 
-    for (j = 0; j < linha; j++)
-    {
-        for (i = 0; i < coluna; i++)
-        {
-            fscanf(fp, "%d %d %d", &r, &g, &b);
-            matriz[j][i] = (int)((r * 0.30) + (g * 0.59) + (b * 0.11));
-        }
-    }
+	// CRIANDO A IMAGEM P&B
 
-    fclose(fp);
-    printf("Imagem foi gerada com sucesso.\n");
+    FILE* fp_novo = fopen ("araravermelhaP&B.ppm", "w");
+    printf("criou o arquivo\n");
+    
+        fprintf (fp_novo, "P2\n");
+        fprintf (fp_novo, "%d %d\n", coluna, linha);
+        fprintf (fp_novo, "%d\n", val);
 
-    char nomeSaida[120];
-    strcpy(nomeSaida, nomeImagem);
-    char *ponto = strrchr(nomeSaida, '.');
-    if (ponto != NULL)
-        *ponto = '\0';
-
-    strcat(nomeSaida, "_cinza.ppm");
-
-    FILE *fp_novo = fopen(nomeSaida, "w");
-    if (fp_novo == NULL)
-    {
-        printf("Erro ao criar o novo arquivo!\n");
-        return;
-    }
-
-    fprintf(fp_novo, "P2\n");
-    fprintf(fp_novo, "%d %d\n", coluna, linha);
-    fprintf(fp_novo, "%d\n", val);
-
-    for (j = 0; j < linha; j++)
-    {
-        for (i = 0; i < coluna; i++)
-        {
-            fprintf(fp_novo, "%d\n", matriz[j][i]);
-        }
-    }
-
-    fclose(fp_novo);
-    printf("Nova imagem salva como '%s'.\n", nomeSaida);
+		for(j=0; j<linha; j++)
+		{
+			for(i=0; i<coluna; i++)
+			{  	
+			  	fprintf(fp_novo, "%d\n", matriz[j][i]);
+			}
+		}
+		fclose(fp_novo);
+		printf("Fechou o novo arquivo ppm\n");
+   
+   return(0);
 }
 //metodo esta incorreto não possui leitura de arquivo
 void negativa() {
@@ -169,7 +158,7 @@ void negativa() {
 
     // CRIANDO A IMAGEM NEGATIVA
 
-    FILE* fp_novo = fopen ("goldenNegativa.ppm", "w");
+    FILE* fp_novo = fopen ("araravermelhaNegativa.ppm", "w");
     printf("criou o arquivo\n");
     
     fprintf (fp_novo, "P3\n");
