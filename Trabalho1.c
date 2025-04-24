@@ -205,7 +205,6 @@ void negativa()
     printf(GREEN "Nova imagem salva como '%s'.\n", nomeSaida);
 }
 
-// ESTOU MODIFICANDO
 void raioX()
 {
     float fator = 1.5;
@@ -216,24 +215,20 @@ void raioX()
         {
             fscanf(fp, "%d %d %d", &r, &g, &b);
 
+            float fator = 1.2;
             int cinza = (int)(r * 0.299 + g * 0.587 + b * 0.114);
 
-            int invertido = val - cinza;
+            float intensidade = powf((float)cinza, fator);
+            int valorRX = (int)intensidade;
 
-            float norm = (float)invertido / val;
+            if (valorRX > val)
+                valorRX = val;
+            if (valorRX < 0)
+                valorRX = 0;
 
-            float modificado = powf(norm, fator);
-
-            int valorRaioX = (int)(modificado * val);
-
-            if (valorRaioX < 0)
-                valorRaioX = 0;
-            if (valorRaioX > val)
-                valorRaioX = val;
-
-            matriz[j][i].r = valorRaioX;
-            matriz[j][i].g = valorRaioX;
-            matriz[j][i].b = valorRaioX;
+            matriz[j][i].r = valorRX;
+            matriz[j][i].g = valorRX;
+            matriz[j][i].b = valorRX;
         }
     }
 
@@ -281,13 +276,13 @@ void envelhecida()
             fscanf(fp, "%d %d %d", &r, &g, &b);
 
             float fator = 0.1;
-            int novaR1 = (r * (1 + fator));
-            int novaG1 = (g * (1 + fator));
-            int novaB1 = (b * (1 - fator));
+            int novaR = (r * (1 + fator));
+            int novaG = (g * (1 + fator));
+            int novaB = (b * (1 - fator));
 
-            int novaR = (r + 45);
-            int novaG = (g + 25);
-            int novaB = (b - 25);
+            novaR = (r + 60);
+            novaG = (g + 30);
+            novaB = (b - 8);
 
             matriz[j][i].r = novaR;
             matriz[j][i].g = novaG;
