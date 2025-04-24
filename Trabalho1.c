@@ -331,6 +331,10 @@ void envelhecida()
     printf(GREEN "Nova imagem salva como '%s'.\n", nomeSaida);
 }
 
-void rotacionar90() {}
+void rotacionar90() {
 
-void rotacionar180() {}
+}
+
+void rotacionar180() {
+    
+}
