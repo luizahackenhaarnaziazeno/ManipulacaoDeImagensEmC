@@ -41,74 +41,76 @@ int main()
 {
     int opcao;
 
+    
     printf(GREEN "Digite o nome da imagem PPM que deseja manipular (Exemplo: imagem.ppm): " RESET);
     scanf("%s", nomeImagem);
 
-    fp = fopen(nomeImagem, "r");
-
-    if (fp == NULL)
+    do
     {
-        printf(RED "Erro ao abrir o arquivo '%s'!\n", nomeImagem);
-        return 0;
-    }
 
-    fscanf(fp, "%s", tipoImg);
-    printf(BLUE "Tipo de imagem: " RESET "%s\n", tipoImg);
+        // Abrir o arquivo novamente a cada iteração
+        fp = fopen(nomeImagem, "r");
 
-    fscanf(fp, "%d %d", &coluna, &linha);
-    printf(BLUE "Largura: " RESET "%d\n", coluna);
-    printf(BLUE "Altura: " RESET "%d\n", linha);
+        if (fp == NULL)
+        {
+            printf(RED "Erro ao abrir o arquivo '%s'!\n", nomeImagem);
+            return 0;
+        }
 
-    fscanf(fp, "%d", &val);
-    printf(BLUE "Valor maximo de cor: " RESET "%d\n", val);
+        fscanf(fp, "%s", tipoImg);
+        fscanf(fp, "%d %d", &coluna, &linha);
+        fscanf(fp, "%d", &val);
 
-    printf(CYAN "\n========================================\n");
-    printf(MAGENTA "    MENU DE MANIPULACAO DE IMAGEM\n");
-    printf(CYAN "========================================\n");
-    printf(MAGENTA "1." RESET " Gerar imagem em tons de cinza\n");
-    printf(MAGENTA "2." RESET " Gerar imagem negativa\n");
-    printf(MAGENTA "3." RESET " Gerar imagem raio-x\n");
-    printf(MAGENTA "4." RESET " Gerar imagem envelhecida (sepia)\n");
-    printf(MAGENTA "5." RESET " Rotacionar imagem 90 graus\n");
-    printf(MAGENTA "6." RESET " Rotacionar imagem 180 graus\n");
-    printf(MAGENTA "7." RESET " Sair\n");
-    printf(CYAN "========================================\n");
-    printf(GREEN "Escolha a opcao: " RESET);
-    scanf("%d", &opcao);
+        printf(CYAN "\n========================================\n");
+        printf(MAGENTA "    MENU DE MANIPULACAO DE IMAGEM\n");
+        printf(CYAN "========================================\n");
+        printf(MAGENTA "1." RESET " Gerar imagem em tons de cinza\n");
+        printf(MAGENTA "2." RESET " Gerar imagem negativa\n");
+        printf(MAGENTA "3." RESET " Gerar imagem raio-x\n");
+        printf(MAGENTA "4." RESET " Gerar imagem envelhecida (sepia)\n");
+        printf(MAGENTA "5." RESET " Rotacionar imagem 90 graus\n");
+        printf(MAGENTA "6." RESET " Rotacionar imagem 180 graus\n");
+        printf(MAGENTA "7." RESET " Sair\n");
+        printf(CYAN "========================================\n");
+        printf(GREEN "Escolha a opcao: " RESET);
+        scanf("%d", &opcao);
 
-    switch (opcao)
-    {
-    case 1:
-        printf(BLUE "Imagem com tons de cinza.\n");
-        tonsDeCinza();
-        break;
-    case 2:
-        printf(BLUE "Imagem negativa.\n");
-        negativa();
-        break;
-    case 3:
-        printf(BLUE "Imagem raio-x.\n");
-        raioX();
-        break;
-    case 4:
-        printf(BLUE "Imagem envelhecida (sepia).\n");
-        envelhecida();
-        break;
-    case 5:
-        printf(BLUE "Imagem rotacionada 90 graus.\n");
-        rotacionar90();
-        break;
-    case 6:
-        printf(BLUE "Imagem rotacionada 180 graus.\n");
-        rotacionar180();
-        break;
-    case 7:
-        printf(BLUE "Fechando o programa.\n");
-        fclose(fp);
-        break;
-    default:
-        printf(RED "Opcao invalida.\n");
-    }
+        switch (opcao)
+        {
+        case 1:
+            printf(BLUE "Imagem com tons de cinza.\n");
+            tonsDeCinza();
+            break;
+        case 2:
+            printf(BLUE "Imagem negativa.\n");
+            negativa();
+            break;
+        case 3:
+            printf(BLUE "Imagem raio-x.\n");
+            raioX();
+            break;
+        case 4:
+            printf(BLUE "Imagem envelhecida (sepia).\n");
+            envelhecida();
+            break;
+        case 5:
+            printf(BLUE "Imagem rotacionada 90 graus.\n");
+            rotacionar90();
+            break;
+        case 6:
+            printf(BLUE "Imagem rotacionada 180 graus.\n");
+            rotacionar180();
+            break;
+        case 7:
+            printf(BLUE "Fechando o programa.\n");
+            break;
+        default:
+            printf(RED "Opcao invalida.\n");
+        }
+
+    } while (opcao != 7);
+
+    return 0;
 }
 
 void tonsDeCinza()
@@ -353,14 +355,12 @@ void rotacionar90()
     fclose(fp);
     printf("Imagem foi lida com sucesso.\n");
 
-    
     strcpy(nomeSaida, nomeImagem);
     char *ponto = strrchr(nomeSaida, '.');
     if (ponto != NULL)
         *ponto = '\0';
 
     strcat(nomeSaida, "_90graus.ppm");
-
 
     FILE *fp_novo = fopen(nomeSaida, "w");
     if (fp_novo == NULL)
@@ -370,10 +370,9 @@ void rotacionar90()
     }
 
     fprintf(fp_novo, "P3\n");
-    fprintf(fp_novo, "%d %d\n", linha, coluna); 
+    fprintf(fp_novo, "%d %d\n", linha, coluna);
     fprintf(fp_novo, "%d\n", val);
 
-   
     for (i = 0; i < coluna; i++)
     {
         for (j = linha - 1; j >= 0; j--)
@@ -388,8 +387,8 @@ void rotacionar90()
     printf(GREEN "Nova imagem rotacionada 90 graus salva como '%s'.\n", nomeSaida);
 }
 
-
-void rotacionar180() {
+void rotacionar180()
+{
     for (j = 0; j < linha; j++)
     {
         for (i = 0; i < coluna; i++)
@@ -419,10 +418,9 @@ void rotacionar180() {
     }
 
     fprintf(fp_novo, "P3\n");
-    fprintf(fp_novo, "%d %d\n", coluna, linha); 
+    fprintf(fp_novo, "%d %d\n", coluna, linha);
     fprintf(fp_novo, "%d\n", val);
 
-   
     for (j = linha - 1; j >= 0; j--)
     {
         for (i = coluna - 1; i >= 0; i--)
@@ -436,4 +434,3 @@ void rotacionar180() {
     fclose(fp_novo);
     printf(GREEN "Nova imagem rotacionada 180 graus salva como '%s'.\n", nomeSaida);
 }
-
