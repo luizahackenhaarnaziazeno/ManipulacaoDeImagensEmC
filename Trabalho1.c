@@ -1,3 +1,4 @@
+
 /*
 Programação de Baixo Nível 2025/1
 Trabalho 1 - Manipulação de Imagens PPM
@@ -41,14 +42,11 @@ int main()
 {
     int opcao;
 
-    
     printf(GREEN "Digite o nome da imagem PPM que deseja manipular (Exemplo: imagem.ppm): " RESET);
     scanf("%s", nomeImagem);
 
     do
     {
-
-        // Abrir o arquivo novamente a cada iteração
         fp = fopen(nomeImagem, "r");
 
         if (fp == NULL)
@@ -217,7 +215,6 @@ void raioX()
         {
             fscanf(fp, "%d %d %d", &r, &g, &b);
 
-            float fator = 1.2;
             int cinza = (int)(r * 0.299 + g * 0.587 + b * 0.114);
 
             float intensidade = powf((float)cinza, fator);
@@ -353,7 +350,7 @@ void rotacionar90()
     }
 
     fclose(fp);
-    printf("Imagem foi lida com sucesso.\n");
+    printf("Imagem foi gerada com sucesso.\n");
 
     strcpy(nomeSaida, nomeImagem);
     char *ponto = strrchr(nomeSaida, '.');
@@ -384,7 +381,7 @@ void rotacionar90()
     }
 
     fclose(fp_novo);
-    printf(GREEN "Nova imagem rotacionada 90 graus salva como '%s'.\n", nomeSaida);
+    printf(GREEN "Nova imagem salva como '%s'.\n", nomeSaida);
 }
 
 void rotacionar180()
@@ -401,7 +398,7 @@ void rotacionar180()
     }
 
     fclose(fp);
-    printf("Imagem foi lida com sucesso.\n");
+    printf("Imagem foi gerada com sucesso.\n");
 
     strcpy(nomeSaida, nomeImagem);
     char *ponto = strrchr(nomeSaida, '.');
@@ -432,5 +429,5 @@ void rotacionar180()
     }
 
     fclose(fp_novo);
-    printf(GREEN "Nova imagem rotacionada 180 graus salva como '%s'.\n", nomeSaida);
+    printf(GREEN "Nova imagem salva como '%s'.\n", nomeSaida);
 }
